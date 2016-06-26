@@ -13,8 +13,8 @@ schoolApp.controller('schoolCtrl', ['$scope', 'Classroom',
 	function($scope, Classroom) {
 		$scope.classrooms = Classroom.query();
 		Classroom.query().$promise.then(function(data) {
-        $scope.classrooms = data;
-        console.log(Classroom.query({}));
-	});
-}]);
+		        $scope.classrooms = data;
+		        console.log(Classroom.query({}));
+			});
+		}]);
 
