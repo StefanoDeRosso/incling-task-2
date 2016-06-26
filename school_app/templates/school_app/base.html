@@ -1,0 +1,40 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+<head>
+<script src="http://code.jquery.com/jquery.min.js"></script>
+<link href="http://getbootstrap.com/dist/css/bootstrap.css" rel="stylesheet" type="text/css" />
+<script src="http://getbootstrap.com/dist/js/bootstrap.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-resource.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-route.min.js"></script>
+<script src="{% static 'js/app.js' %}"></script>
+<meta charset="utf-8">
+	<title>School app</title>
+</head>
+
+<body>
+	<div ng-app="schoolApp" ng-controller="schoolCtrl">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Classroom</th>
+					<th>School</th>
+					<th>Floor</th>
+					<th>Academic year</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="classroom in classrooms">
+					<td>{{classroom.classroom}}</td>
+					<td>{{classroom.school.school_name}}</td>
+					<td>{{classroom.floor}}</td>
+					<td>{{classroom.academic_year}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+
+</html>

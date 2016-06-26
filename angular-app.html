@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<script src="http://code.jquery.com/jquery.min.js"></script>
+<link href="http://getbootstrap.com/dist/css/bootstrap.css" rel="stylesheet" type="text/css" />
+<script src="http://getbootstrap.com/dist/js/bootstrap.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-resource.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-route.min.js"></script>
+<meta charset="utf-8">
+	<title>School app</title>
+
+<style type="text/css">
+    .wrapper h1 {
+        text-align: center;
+    }
+    
+    .classrooms-details {
+        margin-bottom: 100px;
+    }
+</style>
+
+<body>
+
+    <div class="wrapper" ng-app="schoolApp" ng-controller="schoolCtrl">
+
+        <div class="classrooms-details">
+            <table class="table table-striped">
+                <h1>STUDENT DETAILS</h1>
+                <thead>
+                    <tr>
+                        <th>Classroom</th>
+                        <th>First name</th>
+                        <th>Last name</th>
+                        <th>Gender</th>
+                        <th>Birthday</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-if="activeClassroom" ng-repeat="student in activeClassroom.students">
+                        <td>{{activeClassroom.classroom}}</td>
+                        <td>{{student.first_name}}</td>
+                        <td>{{student.last_name}}</td>
+                        <td>{{student.gender}}</td>
+                        <td>{{student.birthday}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <table class="table table-striped">
+            <h1>CLASSROOMS</h1>
+            <thead>
+                <tr>
+                    <th>Classroom</th>
+                    <th>School</th>
+                    <th>Academic year</th>
+                    <th>Floor</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="classroom in classrooms">
+                    <td><a href="#" ng-click="setActiveClassroom(classroom)">{{classroom.classroom}}</a>
+                    </td>
+                    <td>{{classroom.school.school_name}}</td>
+                    <td>{{classroom.academic_year}}</td>
+                    <td>{{classroom.floor}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+<script>
+var app = angular.module("schoolApp", []);
+
+app.controller("schoolCtrl", function($scope) {
+    $scope.classrooms = [{
+        "school": {
+            "id": 1,
+            "school_name": "IPSIA F. Lampertico",
+            "address": "Viale Giangiorgio Trissino, 30",
+            "city": "Vicenza"
+        },
+        "academic_year": "2015/2016",
+        "classroom": "1^A",
+        "floor": 0,
+        "students": [{
+            "classroom": 1,
+            "first_name": "Stefano",
+            "last_name": "Rossi",
+            "gender": "M",
+            "birthday": "1998-06-22"
+        }, {
+            "classroom": 1,
+            "first_name": "Luca",
+            "last_name": "Possanzini",
+            "gender": "M",
+            "birthday": "1999-11-22"
+        }]
+    }, {
+        "school": {
+            "id": 2,
+            "school_name": "ITIS A. Rossi",
+            "address": "Via Legione Gallieno, 52",
+            "city": "Vicenza"
+        },
+        "academic_year": "2015/2016",
+        "classroom": "2^B",
+        "floor": 0,
+        "students": [{
+            "classroom": 2,
+            "first_name": "Sergio",
+            "last_name": "Lazzari",
+            "gender": "M",
+            "birthday": "2001-01-29"
+        }]
+    }, {
+        "school": {
+            "id": 3,
+            "school_name": "Liceo Scientifico G.B. Quadri",
+            "address": "Viale Giosuè Carducci, 17",
+            "city": "Vicenza"
+        },
+        "academic_year": "2015/2016",
+        "classroom": "3^C",
+        "floor": 0,
+        "students": [{
+            "classroom": 3,
+            "first_name": "Lucia",
+            "last_name": "Modella",
+            "gender": "F",
+            "birthday": "2000-05-22"
+        }]
+    }];
+
+    $scope.activeClassroom = null;
+
+    $scope.setActiveClassroom = function(classroom) {
+        $scope.activeClassroom = classroom;
+    };
+
+    console.log($scope.classrooms);
+});
+</script>
+
+</body>
+</html>
